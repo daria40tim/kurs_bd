@@ -1,0 +1,35 @@
+﻿<UserControl x:Class="kurs.View.DataGridView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:kurs.View"
+             mc:Ignorable="d">
+    <Grid>
+        <DataGrid x:Name="dGrid" IsReadOnly="True" SelectedItem="{Binding SelectedPlant}" ItemsSource="{Binding DataGridVM.PlantCollection, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" Tag="{Binding DataContext, ElementName=DataGridV}" HorizontalAlignment="Stretch" Width="auto">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Номер" Binding="{Binding Plant_id}" Width="auto"/>
+                <DataGridTextColumn Header="Вид" Binding="{Binding Sort}"  Width="auto"/>
+                <DataGridTextColumn Header="Сорт" Binding="{Binding Type}" Width="auto"/>
+                <DataGridTextColumn Header="Кол-во" Binding="{Binding Count}" Width="auto"/>
+                <DataGridTextColumn Header="Стадия" Binding="{Binding Stage}" Width="auto"/>
+                <DataGridTemplateColumn Header="Изменить" Width="40">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Button IsEnabled="True" Height="20" Width="20" Command="{Binding DataContext.SellBookCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Новое поступление" Command="{Binding AddNewBookCommand}"/>
+                    <MenuItem Header="Сформировать отчет" Command="{Binding FormReportCommand}"/>
+                    <MenuItem Header="Проклясть" Command="{Binding ChangePriceCommand}"/>
+                </ContextMenu>
+            </DataGrid.ContextMenu>
+        </DataGrid>
+    </Grid>
+</UserControl>
