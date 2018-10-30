@@ -12,6 +12,6 @@ namespace kurs.Model
         public string Login { get; set; }
         public string Password { get; set; }
         public string Position { get; set; }
-        public Greenhouse House_id { get; set; }
+        public int House_id { get; set; }
     }
 }

@@ -14,6 +14,7 @@ namespace kurs
     {
         public static ObservableCollection<Plant> Plants { get; set; }
         public static ObservableCollection<Model.Task> Tasks { get; set; }
+        public static ObservableCollection<Worker> Workers { get; set; }
 
         public static void ReadPlants()
         {
@@ -100,13 +101,48 @@ namespace kurs
                 finally { reader.Close(); }
             }
         }
+        public static void ReadWorkers()
+        {
+            string queryString = "select worker_id, fio, login, password, position, house_id from workers";
+            using (NpgsqlConnection connection = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString))
+            {
+                NpgsqlCommand command = new NpgsqlCommand(queryString, connection);
+                connection.Open();
+                NpgsqlDataReader reader = command.ExecuteReader();
+                try
+                {
+                    while (reader.Read())
+                    {
+                        int house = 0;
+                        if (reader[5].ToString() != "")
+                        {
+                           house = int.Parse(reader[5].ToString());
+                        }
+                            Worker new_Worker = new Worker
+                        {
+                            Worker_id = (int)reader[0],
+                            FIO = reader[1].ToString(),
+                            Login = reader[2].ToString(),
+                            Password = reader[3].ToString(),
+                            Position = reader[4].ToString(),
+                            House_id = house
+                    };
+                        Workers.Add(new_Worker);
+                        new_Worker = null;
+                    }
+                }
+                finally { reader.Close(); }
+            }
+        }
         public static void FillData()
         {
             Plants = new ObservableCollection<Plant>();
             Tasks = new ObservableCollection<Model.Task>();
+            Workers = new ObservableCollection<Worker>();
             ReadPlants();
             ReadCards();
             ReadTasks();
+            ReadWorkers();
             
         }
     }

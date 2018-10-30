@@ -7,7 +7,7 @@ using System.Windows.Input;
 
 namespace kurs
 {
-    class BaseCommand:ICommand
+    public class BaseCommand:ICommand
     {
         Action _executeMethod;
         Func<bool> _canExecuteMethod;

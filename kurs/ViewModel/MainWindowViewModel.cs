@@ -76,5 +76,54 @@ namespace kurs.ViewModel
 
 
 
+        public string Temperature
+        {
+            get { return (string)GetValue(TemperatureProperty); }
+            set { SetValue(TemperatureProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Temperature.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty TemperatureProperty =
+            DependencyProperty.Register("Temperature", typeof(string), typeof(MainWindowViewModel), new PropertyMetadata(null));
+
+
+
+        public string Air_Humidity
+        {
+            get { return (string)GetValue(Air_HumidityProperty); }
+            set { SetValue(Air_HumidityProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Air_Humidity.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty Air_HumidityProperty =
+            DependencyProperty.Register("Air_Humidity", typeof(string), typeof(MainWindowViewModel), new PropertyMetadata(null));
+
+
+
+        public string Soil_Moisture
+        {
+            get { return (string)GetValue(Soil_MoistureProperty); }
+            set { SetValue(Soil_MoistureProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Soil_Moisture.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty Soil_MoistureProperty =
+            DependencyProperty.Register("Soil_Moisture", typeof(string), typeof(MainWindowViewModel), new PropertyMetadata(null));
+
+
+        public string Lightning
+        {
+            get { return (string)GetValue(LightningProperty); }
+            set { SetValue(LightningProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Lightning.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty LightningProperty =
+            DependencyProperty.Register("Lightning", typeof(string), typeof(MainWindowViewModel), new PropertyMetadata(null));
+
+
+
+
+
     }
 }
