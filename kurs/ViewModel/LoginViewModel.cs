@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Npgsql;
+using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,9 +25,30 @@ namespace kurs.ViewModel
 
         private void ConfirmEnter()
         {
+            if (UserLogin == null || UserPassword==null)
+            {
+                MessageBox.Show("Некоторые поля для ввода не заполнены");
+                return;
+            }
+            string queryString = "select house_id from workers where login = @user_login and password = @user_password";
+             using (NpgsqlConnection connection = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString))
+             {
+                 NpgsqlCommand command = new NpgsqlCommand(queryString, connection);
+                 command.Parameters.AddWithValue("@user_login", UserLogin);
+                 command.Parameters.AddWithValue("@user_password", UserPassword);
+                 connection.Open();
+                 NpgsqlDataReader reader = command.ExecuteReader();
+                 try
+                 {
+                     while (reader.Read())
+                     {
+                         Collection.house = int.Parse(reader[0].ToString());
+                     }
+                 }
+                 finally { reader.Close(); }
+             }
             MainWindow new_MainWindow = new MainWindow();
-            new_MainWindow.Show();
-            //MessageBox.Show("1");
+            new_MainWindow.ShowDialog();
         }
 
         public BaseCommand OKCommand

@@ -12,16 +12,19 @@ namespace kurs
 {
     public static class Collection
     {
+        public static int house = 0;
         public static ObservableCollection<Plant> Plants { get; set; }
         public static ObservableCollection<Model.Task> Tasks { get; set; }
         public static ObservableCollection<Worker> Workers { get; set; }
+        public static ObservableCollection<Card> Cards { get; set; }
 
-        public static void ReadPlants()
+        public static void ReadPlants(int house)
         {
-            string queryString = "select p_id, s_title, t_title, st_title, count,cult_id, house_id from plants natural join stages natural join cultures natural join sorts natural join types order by p_id" ;
+            string queryString = "select p_id, s_title, t_title, st_title, count,cult_id, house_id from plants natural join stages natural join cultures natural join sorts natural join types where cultures.house_id = @house_id order by p_id ";
             using (NpgsqlConnection connection = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString))
             {
                 NpgsqlCommand command = new NpgsqlCommand(queryString, connection);
+                command.Parameters.AddWithValue("@house_id", house);
                 connection.Open();
                 NpgsqlDataReader reader = command.ExecuteReader();
                 try
@@ -72,12 +75,13 @@ namespace kurs
                 finally { reader.Close(); }
             }
         }
-        public static void ReadCards()
+        public static void ReadCards(int house)
         {
-            string queryString = "select card_id, card_title, st_title, cult_id, optimal, tolerance, limit_dev from cards natural join stages";
+            string queryString = "select card_id, card_title, st_title, cult_id, optimal, tolerance, limit_dev from cards natural join stages natural join plants where house_id=@house_id";
             using (NpgsqlConnection connection = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString))
             {
                 NpgsqlCommand command = new NpgsqlCommand(queryString, connection);
+                command.Parameters.AddWithValue("@house_id", house);
                 connection.Open();
                 NpgsqlDataReader reader = command.ExecuteReader();
                 try
@@ -94,8 +98,12 @@ namespace kurs
                             Tolerance = (float)reader[5],
                             Limit_deviation = (float)reader[6]
                         };
-                        Plants.Where(p => (p.Cult_id == new_Card.Cult_id) && (p.Stage == new_Card.Stage)).First().Cards_of_plant.Add(new_Card);
-                        new_Card = null;
+                        if (Plants.First() != null)
+                        {
+                            Plants.Where(p => (p.Cult_id == new_Card.Cult_id) && (p.Stage == new_Card.Stage)).First().Cards_of_plant.Add(new_Card);
+                        }
+                        Cards.Add(new_Card);
+                            new_Card = null;
                     }
                 }
                 finally { reader.Close(); }
@@ -139,8 +147,9 @@ namespace kurs
             Plants = new ObservableCollection<Plant>();
             Tasks = new ObservableCollection<Model.Task>();
             Workers = new ObservableCollection<Worker>();
-            ReadPlants();
-            ReadCards();
+            Cards = new ObservableCollection<Card>();
+            ReadPlants(house);
+            ReadCards(house);
             ReadTasks();
             ReadWorkers();
             

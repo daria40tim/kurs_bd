@@ -30,7 +30,10 @@
         <GridSplitter Grid.Column="3" Width="5" HorizontalAlignment="Center" VerticalAlignment="Stretch" Grid.RowSpan="3" />
         <gridv:DataGridView x:Name="uBlock" Grid.Column ="0" Grid.Row="1" DataContext="{StaticResource MainWindowVM}" Width="auto" Height="auto" VerticalAlignment="Stretch"/>
         <gridv:TaskView x:Name="uTask" Grid.Column ="0" Grid.Row="4" Grid.ColumnSpan="5" DataContext="{StaticResource MainWindowVM}" Width="auto" Height="auto" HorizontalAlignment="Stretch"/>
-        <gridv:CurrentParametersView x:Name="uCurrent" Grid.Column ="2" Grid.Row="1" DataContext="{StaticResource MainWindowVM}" Width="auto" Height="auto" HorizontalAlignment="Stretch"/>
+        <StackPanel Grid.Column ="2" Grid.Row="1" DataContext="{StaticResource MainWindowVM}">
+            <gridv:CurrentParametersView x:Name="uCurrent" DataContext="{StaticResource MainWindowVM}" Width="auto" Height="auto" HorizontalAlignment="Stretch"/>
+            <Button Content="Check" Command="{Binding CheckCommand}"/>
+        </StackPanel>
         <gridv:CardsView x:Name="uCard" Grid.Column ="4" Grid.Row="1" DataContext="{StaticResource MainWindowVM}" Width="auto" Height="auto" HorizontalAlignment="Stretch"/>
         <Menu Grid.Row="0" Height="25" VerticalAlignment="Top">
             <MenuItem Header="Помощь">

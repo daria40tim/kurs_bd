@@ -10,13 +10,13 @@
         <StackPanel>
             <Label Content="Текущие показатели" FontSize="16" Margin="15"/>
             <Label Content="Температура воздуха" HorizontalAlignment="Center"/>
-            <Label Content="16 градусов С" HorizontalAlignment="Center"/>
+            <Label Content="{Binding Temperature}" HorizontalAlignment="Center"/>
             <Label Content="Влажность воздуха" HorizontalAlignment="Center"/>
-            <Label Content="75 %" HorizontalAlignment="Center"/>
+            <Label Content="{Binding Air_humidity}" HorizontalAlignment="Center"/>
             <Label Content="Влажность почвы" HorizontalAlignment="Center"/>
-            <Label Content="65 %" HorizontalAlignment="Center"/>
+            <Label Content="{Binding Soil_Moisture}" HorizontalAlignment="Center"/>
             <Label Content="Освещенность" HorizontalAlignment="Center"/>
-            <Label Content="90 %" HorizontalAlignment="Center"/>
+            <Label Content="{Binding Lightning}" HorizontalAlignment="Center"/>
         </StackPanel>
     </Grid>
 </UserControl>
