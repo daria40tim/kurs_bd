@@ -1,4 +1,5 @@
 ﻿using kurs.Model;
+using kurs.View;
 using Npgsql;
 using System;
 using System.Collections.Generic;
@@ -17,9 +18,9 @@ namespace kurs.ViewModel
         {
             Collection.FillData();
             Temperature = 16;
-            Air_humidity = 65;
+            Air_humidity = 45;
             Soil_Moisture = 81;
-            Lightning = -2;
+            Lightning = 80;
             DataGridVM = new DataGridViewModel();
             TaskVM = new TaskViewModel();
             SelectedPlant = DataGridVM.SelectedPlant;
@@ -30,6 +31,19 @@ namespace kurs.ViewModel
         private void InicializeCommands()
         {
             CheckCommand = new BaseCommand(Check);
+            ChangeStageCommand = new BaseCommand(ChangeStage);
+        }
+
+        private void ChangeStage()
+        {
+            ChangeStageViewModel ChangeStageVM = new ChangeStageViewModel(this.SelectedPlant);
+            ChangeStageView ChangeStageV = new ChangeStageView();
+            ChangeStageV.DataContext = ChangeStageVM;
+            ChangeStageViewModel.OnClose += (closeResult) =>
+            {
+                ChangeStageV.Close();
+            };
+            ChangeStageV.ShowDialog();
         }
 
         private void Check()
@@ -81,7 +95,6 @@ namespace kurs.ViewModel
             DependencyProperty.Register("CardsVM", typeof(CardsViewModel), typeof(MainWindowViewModel), new PropertyMetadata(null));
 
 
-
         public TaskViewModel TaskVM
         {
             get { return (TaskViewModel)GetValue(TaskVMProperty); }
@@ -102,6 +115,18 @@ namespace kurs.ViewModel
         // Using a DependencyProperty as the backing store for DataGridVM.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty DataGridVMProperty =
             DependencyProperty.Register("DataGridVM", typeof(DataGridViewModel), typeof(MainWindowViewModel), new PropertyMetadata(null));
+
+
+
+        public BaseCommand ChangeStageCommand
+        {
+            get { return (BaseCommand)GetValue(ChangeStageCommandProperty); }
+            set { SetValue(ChangeStageCommandProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for ChangeStageCommand.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ChangeStageCommandProperty =
+            DependencyProperty.Register("ChangeStageCommand", typeof(BaseCommand), typeof(MainWindowViewModel), new PropertyMetadata(null));
 
 
 
@@ -170,7 +195,7 @@ namespace kurs.ViewModel
                     float max_range = optimum + tolerance;
                     if (int.Parse(d.GetValue(Air_humidityProperty).ToString()) <= min || int.Parse(d.GetValue(Air_humidityProperty).ToString()) >= max)
                     {
-                        string message = "Влажность воздуха " + d.GetValue(Soil_MoistureProperty).ToString() + " опасна для растений";
+                        string message = "Влажность воздуха " + d.GetValue(Air_humidityProperty).ToString() + " опасна для растений";
                         string InsString = "insert into errors values (default, @message_str, now(), @card_id)";
                         using (NpgsqlConnection con = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString))
                         {

@@ -76,12 +76,16 @@
     <Compile Include="BaseCommand.cs" />
     <Compile Include="Collection.cs" />
     <Compile Include="ViewModel\CardsViewModel.cs" />
+    <Compile Include="ViewModel\ChangeStageViewModel.cs" />
     <Compile Include="ViewModel\DataGridViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\TaskViewModel.cs" />
     <Compile Include="View\CardsView.xaml.cs">
       <DependentUpon>CardsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ChangeStageView.xaml.cs">
+      <DependentUpon>ChangeStageView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\CurrentParametersView.xaml.cs">
       <DependentUpon>CurrentParametersView.xaml</DependentUpon>
@@ -111,6 +115,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="View\CardsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ChangeStageView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

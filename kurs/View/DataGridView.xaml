@@ -17,7 +17,7 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
-                                <Button IsEnabled="True" Height="20" Width="20" Command="{Binding DataContext.SellBookCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
+                                <Button IsEnabled="True" Height="20" Width="20" Command="{Binding DataContext.ChangeStageCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
