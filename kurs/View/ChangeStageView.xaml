@@ -4,14 +4,20 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:kurs.View"
+        xmlns:chstvm="clr-namespace:kurs.ViewModel"
         mc:Ignorable="d"
         Title="ChangeStageView" Height="240" Width="300">
+    <Window.Resources>
+        <DataTemplate x:Key="ComboBoxViewTemp">
+            <TextBlock Text="{Binding Title}"/>
+        </DataTemplate>
+    </Window.Resources>
     <Grid>
         <StackPanel>
             <Label Content="Количество растений:" Margin="15"/>
             <TextBox Text="{Binding PlantCount}" Margin="15 0"/>
             <Label Content="Новая стадия" Margin="15"/>
-            <TextBox Text="{Binding PlantStage}" Margin="15 0"/>
+            <ComboBox ItemsSource="{Binding StageCollection}" ItemTemplate="{StaticResource ComboBoxViewTemp}" SelectedItem="{Binding SelectedStage}" Margin="15 0"/>
             <Button Command="{Binding OKCommand}" Content="ОК" Margin="15" Width="100"/>
         </StackPanel>
     </Grid>

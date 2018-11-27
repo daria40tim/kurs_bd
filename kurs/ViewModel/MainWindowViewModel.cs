@@ -16,6 +16,7 @@ namespace kurs.ViewModel
     { 
         public MainWindowViewModel()
         {
+
             Collection.FillData();
             Temperature = 16;
             Air_humidity = 45;
@@ -42,6 +43,7 @@ namespace kurs.ViewModel
             ChangeStageViewModel.OnClose += (closeResult) =>
             {
                 ChangeStageV.Close();
+                DataGridVM = new DataGridViewModel();
             };
             ChangeStageV.ShowDialog();
         }

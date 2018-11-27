@@ -75,6 +75,7 @@
     </ApplicationDefinition>
     <Compile Include="BaseCommand.cs" />
     <Compile Include="Collection.cs" />
+    <Compile Include="Model\Stage.cs" />
     <Compile Include="ViewModel\CardsViewModel.cs" />
     <Compile Include="ViewModel\ChangeStageViewModel.cs" />
     <Compile Include="ViewModel\DataGridViewModel.cs" />

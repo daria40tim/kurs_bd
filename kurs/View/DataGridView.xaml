@@ -12,7 +12,7 @@
                 <DataGridTextColumn Header="Вид" Binding="{Binding Sort}"  Width="auto"/>
                 <DataGridTextColumn Header="Сорт" Binding="{Binding Type}" Width="auto"/>
                 <DataGridTextColumn Header="Кол-во" Binding="{Binding Count}" Width="auto"/>
-                <DataGridTextColumn Header="Стадия" Binding="{Binding Stage}" Width="auto"/>
+                <DataGridTextColumn Header="Стадия" Binding="{Binding Stage_id.Title}"  Width="auto"/>
                 <DataGridTemplateColumn Header="Изменить" Width="40">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

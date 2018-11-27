@@ -17,10 +17,35 @@ namespace kurs
         public static ObservableCollection<Model.Task> Tasks { get; set; }
         public static ObservableCollection<Worker> Workers { get; set; }
         public static ObservableCollection<Card> Cards { get; set; }
-
+        public static ObservableCollection<Stage> Stages { get; set; }
+        public static void ReadStages()
+        {
+            string queryString = "select stage_id, st_title from stages";
+            using (NpgsqlConnection connection = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString))
+            {
+                NpgsqlCommand command = new NpgsqlCommand(queryString, connection);
+                command.Parameters.AddWithValue("@house_id", house);
+                connection.Open();
+                NpgsqlDataReader reader = command.ExecuteReader();
+                try
+                {
+                    while (reader.Read())
+                    {
+                        Stage new_stage = new Stage
+                        {
+                            ID = (int)reader[0],
+                            Title = reader[1].ToString(),
+                        };
+                        Stages.Add(new_stage);
+                        new_stage = null;
+                    }
+                }
+                finally { reader.Close(); }
+            }
+        }
         public static void ReadPlants(int house)
         {
-            string queryString = "select p_id, s_title, t_title, st_title, count,cult_id, house_id from plants natural join stages natural join cultures natural join sorts natural join types where cultures.house_id = @house_id order by p_id ";
+            string queryString = "select p_id, s_title, t_title, stage_id, count,cult_id, house_id from plants natural join stages natural join cultures natural join sorts natural join types where house_id = @house_id order by p_id ";
             using (NpgsqlConnection connection = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString))
             {
                 NpgsqlCommand command = new NpgsqlCommand(queryString, connection);
@@ -36,7 +61,7 @@ namespace kurs
                             Plant_id = (int)reader[0],
                             Sort = reader[1].ToString(),
                             Type = reader[2].ToString(),
-                            Stage = reader[3].ToString(),
+                            Stage_id =Stages.Where(o=>o.ID==(int)reader[3]).FirstOrDefault(),
                             Count = (int)reader[4],
                             Cult_id = (int)reader[5],
                             House_id = (int)reader[6],
@@ -100,7 +125,7 @@ namespace kurs
                         };
                         if (Plants.First() != null)
                         {
-                            Plants.Where(p => (p.Cult_id == new_Card.Cult_id) && (p.Stage == new_Card.Stage)).First().Cards_of_plant.Add(new_Card);
+                            Plants.Where(p => (p.Cult_id == new_Card.Cult_id) && (p.Stage_id.Title == new_Card.Stage)).First().Cards_of_plant.Add(new_Card);
                         }
                         Cards.Add(new_Card);
                             new_Card = null;
@@ -144,12 +169,14 @@ namespace kurs
         }
         public static void FillData()
         {
+            Stages = new ObservableCollection<Stage>();
             Plants = new ObservableCollection<Plant>();
             Tasks = new ObservableCollection<Model.Task>();
             Workers = new ObservableCollection<Worker>();
             Cards = new ObservableCollection<Card>();
-            ReadPlants(house);
-            ReadCards(house);
+            ReadStages();
+            ReadPlants(1/*house*/);
+            ReadCards(1/*house*/);
             ReadTasks();
             ReadWorkers();
             
