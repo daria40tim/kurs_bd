@@ -1,5 +1,8 @@
-﻿using System;
+﻿using kurs.View;
+using Npgsql;
+using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,9 +26,42 @@ namespace kurs.ViewModel
 
         private void ConfirmEnter()
         {
-            MainWindow new_MainWindow = new MainWindow();
-            new_MainWindow.Show();
-            //MessageBox.Show("1");
+            if (UserLogin == null || UserPassword==null)
+            {
+                MessageBox.Show("Некоторые поля для ввода не заполнены");
+                return;
+            }
+            string queryString = "select house_id from workers where login = @user_login and password = @user_password";
+             using (NpgsqlConnection connection = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString))
+             {
+                 NpgsqlCommand command = new NpgsqlCommand(queryString, connection);
+                 command.Parameters.AddWithValue("@user_login", UserLogin);
+                 command.Parameters.AddWithValue("@user_password", UserPassword);
+                 connection.Open();
+                 NpgsqlDataReader reader = command.ExecuteReader();
+                try
+                {
+                    while (reader.Read())
+                    {
+                        Collection.house = int.Parse(reader[0].ToString());
+                    }
+                }
+                catch (Exception e)
+                {
+                    Collection.house = -1;
+                }
+                finally { reader.Close(); }
+             }
+            if (Collection.house != 0)
+            {
+                MainWindow new_MainWindow = new MainWindow();
+                new_MainWindow.ShowDialog();
+            }
+            else
+            {
+                AdminView new_AdminView = new AdminView();
+                new_AdminView.ShowDialog();
+            }
         }
 
         public BaseCommand OKCommand

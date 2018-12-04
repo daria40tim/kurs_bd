@@ -75,43 +75,18 @@
     </ApplicationDefinition>
     <Compile Include="BaseCommand.cs" />
     <Compile Include="Collection.cs" />
-    <Compile Include="Model\Crop.cs" />
-    <Compile Include="Model\Stage.cs" />
-    <Compile Include="ViewModel\AdminViewModel.cs" />
     <Compile Include="ViewModel\CardsViewModel.cs" />
-    <Compile Include="ViewModel\ChangeStageViewModel.cs" />
-    <Compile Include="ViewModel\CropViewModel.cs" />
     <Compile Include="ViewModel\DataGridViewModel.cs" />
-    <Compile Include="ViewModel\GetCropViewModel.cs" />
-    <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\TaskViewModel.cs" />
-    <Compile Include="View\AddTaskView.xaml.cs">
-      <DependentUpon>AddTaskView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\AdminView.xaml.cs">
-      <DependentUpon>AdminView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\CardsView.xaml.cs">
       <DependentUpon>CardsView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\ChangeStageView.xaml.cs">
-      <DependentUpon>ChangeStageView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\CropGridView.xaml.cs">
-      <DependentUpon>CropGridView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\CurrentParametersView.xaml.cs">
       <DependentUpon>CurrentParametersView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\DataGridView.xaml.cs">
       <DependentUpon>DataGridView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="LoginView.xaml.cs">
-      <DependentUpon>LoginView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\GetCropView.xaml.cs">
-      <DependentUpon>GetCropView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\TaskView.xaml.cs">
       <DependentUpon>TaskView.xaml</DependentUpon>
@@ -131,23 +106,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="View\AddTaskView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\AdminView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\CardsView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\ChangeStageView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\CropGridView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -156,14 +115,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\DataGridView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="LoginView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\GetCropView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

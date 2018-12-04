@@ -13,7 +13,11 @@ namespace kurs.ViewModel
         public CardsViewModel(Plant SelectedPlant)
         {
             Collection.FillData();
-           if (SelectedPlant != null)
+           if (SelectedPlant == null)
+            {
+                PlantCardCollection = Collection.Plants.OrderBy(o=>o.Plant_id).First().Cards_of_plant;
+            }
+            else
             {
               PlantCardCollection = SelectedPlant.Cards_of_plant;
             }

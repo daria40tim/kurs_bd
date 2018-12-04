@@ -13,10 +13,10 @@
     <Grid DataContext="{StaticResource LoginVM}">
         <StackPanel>
             <Label Content="Имя пользователя" Margin="15 15 15 0"/>
-            <TextBox Text="{Binding UserName}" Margin="15 0"/>
+            <TextBox Text="{Binding UserLogin}" Margin="15 0"/>
             <Label Content="Пароль" Margin="15 15 15 0"/>
             <TextBox Text="{Binding UserPassword}" Margin="15 0"/>
-            <Button Content="ОК" Command="{Binding OKCommand}" Margin="20" Width="70" />
+            <Button Content="ОК" Command="{Binding OKCommand}" IsDefault="True" Margin="20" Width="70" />
         </StackPanel>
     </Grid>
 </Window>
