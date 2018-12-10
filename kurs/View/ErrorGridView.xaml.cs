@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace kurs.View
 {
     /// <summary>
-    /// Логика взаимодействия для AddTaskView.xaml
+    /// Логика взаимодействия для ErrorGridView.xaml
     /// </summary>
-    public partial class AddTaskView : Window
+    public partial class ErrorGridView : UserControl
     {
-        public AddTaskView()
+        public ErrorGridView()
         {
             InitializeComponent();
         }

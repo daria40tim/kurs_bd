@@ -7,39 +7,32 @@
         xmlns:adminvm="clr-namespace:kurs.ViewModel"
         xmlns:gridcropv="clr-namespace:kurs.View"
         mc:Ignorable="d"
-        Title="AdminView" Height="300" Width="300">
+        Title="AdminView" Height="500" Width="500">
     <Window.Resources>
         <adminvm:AdminViewModel x:Key="AdminVM"/>
         <adminvm:CropViewModel x:Key="CropVM"/>
+        <adminvm:ErrorGridViewModel x:Key="ErrorVM"/>
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="5"/>
                 <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="5"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="5"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto" />
-                <RowDefinition/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-            </Grid.RowDefinitions>
-            <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Center" VerticalAlignment="Stretch" Grid.RowSpan="3" />
-            <GridSplitter Grid.Column="3" Width="5" HorizontalAlignment="Center" VerticalAlignment="Stretch" Grid.RowSpan="3" />
-            <gridcropv:CropGridView x:Name="uBlock" Grid.Column ="0" Grid.Row="1" DataContext="{StaticResource AdminVM}" Width="auto" Height="auto" VerticalAlignment="Stretch"/>
-            <gridcropv:AddTaskView x:Name="uTask" Grid.Column ="0" Grid.Row="4" Grid.ColumnSpan="5" DataContext="{StaticResource AdminVM}" Width="auto" Height="auto" HorizontalAlignment="Stretch"/>
-            <StackPanel Grid.Column ="2" Grid.Row="1" DataContext="{StaticResource AdminVM}">
-                <gridcropv:CurrentParametersView x:Name="uCurrent" DataContext="{StaticResource AdminVM}" Width="auto" Height="auto" HorizontalAlignment="Stretch"/>
-                <Button Content="Собрать урожай" Command="{Binding CheckCommand}"/>
-            </StackPanel>
-            <gridcropv:CardsView x:Name="uCard" Grid.Column ="4" Grid.Row="1" DataContext="{StaticResource AdminVM}" Width="auto" Height="auto" HorizontalAlignment="Stretch"/>
-            <Menu Grid.Row="0" Height="25" VerticalAlignment="Top">
-                <MenuItem Header="Помощь">
-                    <MenuItem Header="Отчет об ошибке" ></MenuItem>
-                    <MenuItem Header="Сохранить и выйти" ></MenuItem>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Menu DataContext="{StaticResource AdminVM}">
+                <MenuItem Header="Добавить">
+                    <MenuItem Header="Задачу" Command="{Binding AddTaskCommand}"/>
+                    <MenuItem Header="Культуру" Command="{Binding AddCultureCommand}"/>
                 </MenuItem>
             </Menu>
-        </Grid>
+            <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Center" VerticalAlignment="Stretch" Grid.RowSpan="3" />
+            <gridcropv:CropGridView x:Name="uBlock" Grid.Column ="0" Grid.Row="1" DataContext="{StaticResource AdminVM}" Width="auto" Height="auto" VerticalAlignment="Stretch"/>
+        <gridcropv:ErrorGridView x:Name="uER" Grid.Column ="2" Grid.Row="1" DataContext="{StaticResource AdminVM}" Width="auto" Height="auto" VerticalAlignment="Stretch"/>
+    </Grid>
 </Window>

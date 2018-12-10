@@ -42,6 +42,31 @@ namespace kurs.ViewModel
             }
         }
 
+
+        public BaseCommand DataFilterCommand
+        {
+            get { return (BaseCommand)GetValue(DataFilterCommandProperty); }
+            set { SetValue(DataFilterCommandProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for DataFilterCommand.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty DataFilterCommandProperty =
+            DependencyProperty.Register("DataFilterCommand", typeof(BaseCommand), typeof(CropViewModel), new PropertyMetadata(null));
+
+
+        public BaseCommand ValueFilterCommand
+        {
+            get { return (BaseCommand)GetValue(ValueFilterCommandProperty); }
+            set { SetValue(ValueFilterCommandProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for ValueFilterCommand.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ValueFilterCommandProperty =
+            DependencyProperty.Register("ValueFilterCommand", typeof(BaseCommand), typeof(CropViewModel), new PropertyMetadata(null));
+
+
+
+
         public ObservableCollection<Crop> CropCollection
         {
             get { return (ObservableCollection<Crop>)GetValue(CropCollectionProperty); }
@@ -52,6 +77,6 @@ namespace kurs.ViewModel
         public static readonly DependencyProperty CropCollectionProperty =
             DependencyProperty.Register("CropCollection", typeof(ObservableCollection<Crop>), typeof(CropViewModel), new PropertyMetadata(null));
 
-
+        }
     }
-}
+

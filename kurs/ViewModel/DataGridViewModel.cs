@@ -16,6 +16,7 @@ namespace kurs.ViewModel
             Collection.FillData();
             PlantCollection = Collection.Plants;
         }
+        
 
         public ObservableCollection<Plant> PlantCollection
         {

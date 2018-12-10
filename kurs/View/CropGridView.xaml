@@ -7,20 +7,23 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        <DataGrid x:Name="dGrid" IsReadOnly="True" SelectedItem="{Binding SelectedPlant}" ItemsSource="{Binding CropVM.CropCollection, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" Tag="{Binding DataContext, ElementName=CropV}" HorizontalAlignment="Stretch" Width="auto">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Вид" Binding="{Binding Sort}"  Width="auto"/>
-                <DataGridTextColumn Header="Сорт" Binding="{Binding Type}" Width="auto"/>
-                <DataGridTextColumn Header="Дата сбора" Binding="{Binding Date}" Width="auto"/>
-                <DataGridTextColumn Header="Кол-во(кг)" Binding="{Binding Value}"  Width="auto"/>
-            </DataGrid.Columns>
-            <DataGrid.ContextMenu>
-                <ContextMenu>
-                    <MenuItem Header="Новое поступление" Command="{Binding AddNewBookCommand}"/>
-                    <MenuItem Header="Сформировать отчет" Command="{Binding FormReportCommand}"/>
-                    <MenuItem Header="Проклясть" Command="{Binding ChangePriceCommand}"/>
-                </ContextMenu>
-            </DataGrid.ContextMenu>
-        </DataGrid>
+        <StackPanel>
+            <Label Content="Урожаи"/>
+            <Menu>
+                <MenuItem Header="Сортировать">
+                    <MenuItem Command="{Binding DataFilterCommand}" Header="По дате"/>
+                    <MenuItem Command="{Binding ValueFilterCommand}" Header="По урожайности"/>
+                </MenuItem>
+                <DataGrid x:Name="dGrid" IsReadOnly="True" SelectedItem="{Binding SelectedPlant}" ItemsSource="{Binding CropVM.CropCollection, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" Tag="{Binding DataContext, ElementName=CropV}" HorizontalAlignment="Stretch" Width="auto">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Вид" Binding="{Binding Cult.Sort}"  Width="auto"/>
+                        <DataGridTextColumn Header="Сорт" Binding="{Binding Cult.Type}" Width="auto"/>
+                        <DataGridTextColumn Header="Дата сбора" Binding="{Binding Date}" Width="auto"/>
+                        <DataGridTextColumn Header="Кол-во(кг)" Binding="{Binding Value}"  Width="auto"/>
+                    </DataGrid.Columns>
+
+                </DataGrid>
+            </Menu>
+        </StackPanel>
     </Grid>
 </UserControl>

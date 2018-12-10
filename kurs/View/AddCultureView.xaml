@@ -1,11 +1,11 @@
-﻿<Window x:Class="kurs.View.AddTaskView"
+﻿<Window x:Class="kurs.View.AddCultureView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:kurs.View"
         mc:Ignorable="d"
-        Title="AddTaskView" Height="300" Width="300">
+        Title="AddCultureView" Height="300" Width="300">
     <Window.Resources>
         <DataTemplate x:Key="ComboBoxViewTemp">
             <StackPanel>
@@ -15,10 +15,10 @@
     </Window.Resources>
     <Grid>
         <StackPanel>
-            <Label Content="Выберите работника" Margin="15"/>
-            <ComboBox ItemsSource="{Binding WorkersCollection}" ItemTemplate="{StaticResource ComboBoxViewTemp}" SelectedItem="{Binding SelectedWorker}" Margin="15 0"/>
-            <Label Content="Текст задачи" Margin="15"/>
-            <TextBox Text="{Binding Text}" Margin="15 0"/>
+            <Label Content="Введите название вида" Margin="15"/>
+            <TextBox Text="{Binding CultureSort}" Margin="15 0"/>
+            <Label Content="Введите название сорта" Margin="15"/>
+            <TextBox Text="{Binding CultureType}" Margin="15 0"/>
             <Button Command="{Binding OKCommand}" Content="ОК" Margin="15" Width="100"/>
         </StackPanel>
     </Grid>

@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace kurs.View
 {
     /// <summary>
-    /// Логика взаимодействия для AddTaskView.xaml
+    /// Логика взаимодействия для AddCultureView.xaml
     /// </summary>
-    public partial class AddTaskView : Window
+    public partial class AddCultureView : Window
     {
-        public AddTaskView()
+        public AddCultureView()
         {
             InitializeComponent();
         }
